@@ -32,9 +32,14 @@ class DataSet(object):
             for j in range(len(parser.header)):
                 elem[parser.header[j]] = lists[i][j]
             parsed.append(elem)
-        print(parsed)
-
-
+        processed = {}
+        for elem in parsed:
+            word = elem["Word"]
+            frequency = elem["Frequency"]
+            if frequency in processed:
+                processed[frequency].append(word)
+            else:
+                processed[frequency] = [word]
 
 if __name__ == "__main__":
     d = DataSet()
