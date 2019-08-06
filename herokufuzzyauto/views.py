@@ -9,10 +9,10 @@ import os
 def index(request, word="the"):
    
     values = find(word)
-    values = str([word, dir(request)])
     return render(request, 'base.html', {'data': values})
 
 def find(key):
+
     values = []
     red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
     pipe = red.pipeline()
@@ -23,4 +23,4 @@ def find(key):
         if (n % 64) == 0:
             pipe.execute()
             pipe = red.pipeline()
-    return values
+    return str(values)
