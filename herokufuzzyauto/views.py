@@ -7,9 +7,12 @@ import redis
 
 def index(request):
    
-   red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
+    red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
     keys = red.keys("*")
-    value = red.get(keys[0)]
+    keys.sort().reverse()
+    value = red.get(keys[0])
+    import pickle
+    value = pickle.loads(value)
 
 
     return render(request, 'base.html', {'data': value})
