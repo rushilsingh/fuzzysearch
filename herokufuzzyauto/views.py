@@ -6,7 +6,7 @@ from fuzzy_search import DataSet
 import redis
 import os
 
-def index(request, word):
+def index(request, word="the"):
    
     values = find(word)
     values = str(values)
