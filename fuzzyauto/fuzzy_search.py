@@ -40,6 +40,7 @@ class DataSet(object):
                 processed[frequency].append(word)
             else:
                 processed[frequency] = [word]
+        self.text = processed
 
 if __name__ == "__main__":
     d = DataSet()
