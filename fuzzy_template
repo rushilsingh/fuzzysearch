@@ -1,7 +1,0 @@
-Value Frequency (\d+)
-Value Word ([a-z]+)
-
-Start
-  ^${Word}\s+${Frequency} -> Record
-
-EOF
