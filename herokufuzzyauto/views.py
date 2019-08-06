@@ -11,7 +11,8 @@ def index(request):
     red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
     #keys = red.keys("23135851162")
     #keys.sort().reverse()
-    value = red.get("23135851162")
+    value = red.keys("the")
+    value = str(value)
 
     return render(request, 'base.html', {'data': value})
 

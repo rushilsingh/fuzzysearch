@@ -44,15 +44,15 @@ class DataSet(object):
         for elem in parsed:
             word = elem["Word"]
             frequency = elem["Frequency"]
-            if frequency in processed:
-                processed[frequency].append(word)
+            if word in processed:
+                processed[word].append(frequency)
             else:
-                processed[frequency] = [word]
+                processed[word] = [frequency]
         parsed = processed
         red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
         wipe_redis(red)
         for key in parsed:
-            red.set(key, str(parsed[key]))
+            red.set(key, parsed[key])
 
 
 
