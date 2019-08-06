@@ -15,10 +15,11 @@ def find(key):
 
     values = []
     red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
+    red = redis.Redis()
     pipe = red.pipeline()
     n = 1
     search = "*" + key + "*"
-    values = red.hscan("h", 0, search )
+    values = red.keys(search)
     values = {key:values}
     """    values.append(str(type(key))
         n = n+ 1

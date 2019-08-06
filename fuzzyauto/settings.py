@@ -25,7 +25,7 @@ SECRET_KEY = 'i@b+7i^*7la6j!l0+a%j+@tp$yzh16@!!aeek4i*hkn1+5&9kp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['fuzzyauto.herokuapp.com']
+ALLOWED_HOSTS = ['fuzzyauto.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
