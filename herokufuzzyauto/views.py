@@ -17,7 +17,7 @@ def find(key):
     red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
     pipe = red.pipeline()
     n = 1
-    values = red.hscan("h", 0, "*%s*" % key)
+    values = red.keys("*%s*" % key)
     values = {key:values}
     """    values.append(str(type(key))
         n = n+ 1
