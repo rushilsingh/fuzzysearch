@@ -15,13 +15,13 @@ class DataSet(object):
         
     def parse(self):
         red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
-        
+        #red = redis.Redis()
         red.flushdb()
         pipe = red.pipeline()
         n = 1
         for line in self.text:
-            divide = line.split()
-            pipe.set(divide[0], divide[1])
+            word, frequency = line.split()   
+            pipe.set(word, frequency)
             n = n + 1
             if (n % 64) == 0:
                 pipe.execute()
