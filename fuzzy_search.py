@@ -21,7 +21,7 @@ class DataSet(object):
         n = 1
         for line in self.text:
             divide = line.split()
-            pipe.hmset(divide[0], divide[1])
+            pipe.set(divide[0], divide[1])
             n = n + 1
             if (n % 64) == 0:
                 pipe.execute()
