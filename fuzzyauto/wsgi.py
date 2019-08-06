@@ -8,8 +8,12 @@ https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/
 """
 
 import os
-
+from fuzzy_search import DataSet
 from django.core.wsgi import get_wsgi_application
+
+d = DataSet()
+d.load()
+d.parse()
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "fuzzyauto.settings")
 

@@ -54,15 +54,6 @@ class DataSet(object):
         import pickle
         for key in parsed:
             red.set(key, pickle.dumps(parsed[key]))
-        """ 
-        while True:
-            keys = red.keys('*')
-            print(type(keys))
-            key = keys[0]
-            value = pickle.loads(red.get(key))
-            print(value)
-            break
-        """
 
 
 
