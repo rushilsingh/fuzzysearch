@@ -6,6 +6,14 @@ import datetime
 import textfsm
 import redis
 import pytz
+import pickle
+
+def wipe_redis(red):
+    cursor = '0'
+    while cursor != 0:
+        cursor, keys = red.scan(cursor=cursor, match="*", count=5000)
+        if keys:
+            red.delete(*keys)
 
 
 class DataSet(object):
@@ -40,6 +48,23 @@ class DataSet(object):
                 processed[frequency].append(word)
             else:
                 processed[frequency] = [word]
+        parsed = processed
+        red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
+        wipe_redis(red)
+        import pickle
+        for key in parsed:
+            red.set(key, pickle.dumps(parsed[key]))
+        """ 
+        while True:
+            keys = red.keys('*')
+            print(type(keys))
+            key = keys[0]
+            value = pickle.loads(red.get(key))
+            print(value)
+            break
+        """
+
+
 
 if __name__ == "__main__":
     d = DataSet()
