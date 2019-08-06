@@ -1,2 +1,2 @@
-web: gunicorn herokufuzzyauto.wsgi --log-file -
+web: gunicorn fuzzyauto.wsgi --log-file -
 
