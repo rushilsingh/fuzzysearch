@@ -1,2 +1,2 @@
-web: gunicorn fuzzyauto.wsgi --log-file -
+web: gunicorn fuzzyauto.wsgi --config-- app.yaml --log-file -
 
