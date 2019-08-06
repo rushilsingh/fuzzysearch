@@ -1,1 +1,1 @@
-web: gunicorn --worker-class=gevent --worker-connections=1000 --workers=3 fuzzyauto.wsgi
+web: gunicorn --workers=2 --timeout=120 fuzzyauto.wsgi:application
