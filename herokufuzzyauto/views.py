@@ -10,7 +10,7 @@ def index(request):
    
     red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
     values = []
-    for key in red.scan_iter("procra[a-z]*"):
+    for key in red.scan_iter("*procra*"):
         value = key
         values.append
     values = str(values)
