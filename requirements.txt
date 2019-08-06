@@ -20,8 +20,6 @@ Django==1.11.23
 entrypoints==0.3
 enum34==1.1.6
 frozendict==0.4
-future==0.17.1
-futures==3.3.0
 gyp==0.1
 hyperlink==17.3.1
 idna==2.8
