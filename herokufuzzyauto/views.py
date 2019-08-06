@@ -3,7 +3,13 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from fuzzy_search import DataSet
-d = DataSet()
 def index(request):
-    return render(request, 'base.html', {'data':'dummy'})
+    red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
+    keys = red.keys("*")
+    value = red.get(keys[0)]
+
+
+    return render(request, 'base.html', {'data':value})
+
+
 
