@@ -20,7 +20,6 @@ Django==1.11.23
 entrypoints==0.3
 enum34==1.1.6
 frozendict==0.4
-functools32==3.2.3.post2
 future==0.17.1
 futures==3.3.0
 gyp==0.1
