@@ -15,13 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 #from django.contrib import admin
-from fuzzy_search import DataSet
+from . import views
 
-def render():
-    d = DataSet()
-    d.load()
-    d.parse()
-    return d.text
 urlpatterns = [
-    url(r'^*', render),
+    url(r'^.*$', views.index) 
 ]
