@@ -51,9 +51,8 @@ class DataSet(object):
         parsed = processed
         red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
         wipe_redis(red)
-        import pickle
         for key in parsed:
-            red.set(key, pickle.dumps(parsed[key]))
+            red.set(key, str(parsed[key]))
 
 
 

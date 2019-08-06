@@ -12,9 +12,6 @@ def index(request):
     #keys = red.keys("23135851162")
     #keys.sort().reverse()
     value = red.get("23135851162")
-    import pickle
-    value = pickle.loads(value)
-
 
     return render(request, 'base.html', {'data': value})
 
