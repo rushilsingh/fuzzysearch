@@ -8,13 +8,14 @@ import os
 
 def index(request):
    
-    red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
     values = find("*pro*")
     values = str(values)
     return render(request, 'base.html', {'data': values})
 
 def find(key):
     values = []
+    red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
+    values = find("*pro*")
     pipe = red.pipeline()
     n = 1
     for key in red.scan_iter("*procra*"):
