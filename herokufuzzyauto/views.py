@@ -6,7 +6,7 @@ from fuzzy_search import DataSet
 import redis
 import os
 
-def index(request, word="the"):
+def index(request, word):
    
     values = find(word)
     return render(request, 'base.html', {'data': values})
