@@ -83,7 +83,6 @@ textfsm==1.1.0
 torbrowser-launcher==0.2.9
 tornado==5.1.1
 traitlets==4.3.2
-Twisted==17.9.0
 txsocksx==0.0.0
 urllib3==1.25.3
 waitress==1.0.1
