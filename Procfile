@@ -1,1 +1,1 @@
-web: gunicorn --workers=2 --threads=3 fuzzyauto.wsgi 
+web: gunicorn --workers=1 --threads=4 fuzzyauto.wsgi 
