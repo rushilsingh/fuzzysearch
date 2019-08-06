@@ -14,8 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-#from django.contrib import admin
-import herokufuzzyauto import views
+import views
 urlpatterns = [
      url(r'^/<word>/$', views.index),
 ]
