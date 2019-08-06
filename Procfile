@@ -1,1 +1,1 @@
-web: gunicorn fuzzyauto.wsgi 
+web: gunicorn fuzzyauto.wsgi --log-file--
