@@ -22,7 +22,7 @@ class DataSet(object):
 
     
     def load(self):
-        with open(fname) as f:
+        with open(self.fname) as f:
             self.text = f.read()
         
     def parse(self):
@@ -45,5 +45,6 @@ class DataSet(object):
 
 
 if __name__ == "__main__":
-    bhavcopy = BhavCopy()
-    bhavcopy.download()
+    d = DataSet()
+    d.load()
+    print(d.text)
