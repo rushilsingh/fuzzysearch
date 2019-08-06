@@ -1,2 +1,2 @@
-web: gunicorn fuzzyauto.wsgi --log-file -
+web: gunicorn fuzzyauto.wsgi --workers 3 --timeout 120 --log-file -
 
