@@ -8,9 +8,9 @@ import redis
 def index(request):
    
     red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
-    keys = red.keys("*")
-    keys.sort().reverse()
-    value = red.get(keys[0])
+    #keys = red.keys("23135851162")
+    #keys.sort().reverse()
+    value = red.get("23135851162")
     import pickle
     value = pickle.loads(value)
 
