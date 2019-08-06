@@ -25,29 +25,16 @@ class DataSet(object):
     
     def load(self):
         with open(self.fname) as f:
-            self.text = f.read()
+            self.text = f.readlines()
         
     def parse(self):
-        template = "fuzzy_template"
-
-        with open(template) as f:
-            parser = textfsm.TextFSM(f)
-
-        lists = parser.ParseText(self.text)
-        parsed = []
-        for i in range(len(lists)):
-            elem = {}
-            for j in range(len(parser.header)):
-                elem[parser.header[j]] = lists[i][j]
-            parsed.append(elem)
-         
         red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
         
         wipe_redis(red)
-        for elem in parsed:
-            word = elem["Word"]
-            frequency = elem["Frequency"]
-            red.set(word, frequency)
+
+        for line in self.text:
+            divide = line.split()
+            red.set(divide[0], divide[1])
 
 if __name__ == "__main__":
     d = DataSet()
