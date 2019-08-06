@@ -8,8 +8,8 @@ import os
 
 def index(request, word="the"):
    
-    ##values = find(word)
-    return render(request, 'base.html', {'data': word})
+    values = find(word)
+    return render(request, 'base.html', {'data': values})
 
 def find(key):
 
