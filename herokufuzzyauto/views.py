@@ -10,7 +10,7 @@ def index(request, word="the"):
    
     values = find(word)
     values = str(values)
-    return render(request, 'base.html', {'data': values})
+    return render(request, 'base.html', {'data': word})
 
 def find(key):
     values = []
