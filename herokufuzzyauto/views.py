@@ -10,7 +10,7 @@ from itertools import izip_longest
 def index(request):
    
     red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
-    for keybatch in batcher(red.scan_iter("*the*"), 500):
+    for keybatch in batcher(red.scan_iter("onyx"), 500):
         value = key
         break
     return render(request, 'base.html', {'data': value})
