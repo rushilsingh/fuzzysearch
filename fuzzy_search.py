@@ -52,7 +52,7 @@ class DataSet(object):
         red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
         wipe_redis(red)
         for key in parsed:
-            red.set(key, parsed[key])
+            red.set(str(key), parsed[key])
 
 
 
