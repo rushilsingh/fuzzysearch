@@ -33,7 +33,7 @@ pyparsing==2.4.1.1
 pytest==4.6.4
 python-dateutil==1.5
 pytz==2019.1
-redis==3.2.1
+redis==2.10.6
 requests==2.22.0
 scandir==1.10.0
 six==1.12.0
