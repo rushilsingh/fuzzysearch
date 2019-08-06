@@ -19,13 +19,9 @@ def find(key):
     pipe = red.pipeline()
     n = 1
     search = "*" + key + "*"
-    values = red.hscan(search)
+    for value in red.hscan(search):
+        values.append(value)
 
     values = {key:values}
-    """    values.append(str(type(key))
-        n = n+ 1
-        if (n % 64) == 0:
-            pipe.execute()
-            pipe = red.pipeline()
-    """
+    
     return str(values)
