@@ -27,7 +27,7 @@ class DataSet(object):
 
         for line in self.text:
             divide = line.split()
-            red.hset("h", divide[0], divide[1])
+            red.set(divide[0], divide[1])
 
 if __name__ == "__main__":
     d = DataSet()
