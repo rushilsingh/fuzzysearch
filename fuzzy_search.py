@@ -14,14 +14,14 @@ class DataSet(object):
             self.text = f.readlines()
         
     def parse(self):
-        red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
-        #red = redis.Redis()
+        #red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
+        red = redis.Redis()
         red.flushdb()
         pipe = red.pipeline()
         n = 1
         for line in self.text:
             word, frequency = line.split()   
-            pipe.set(word, frequency)
+            pipe.hset("h", word, frequency)
             n = n + 1
             if (n % 64) == 0:
                 pipe.execute()
