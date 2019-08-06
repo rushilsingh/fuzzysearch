@@ -40,21 +40,13 @@ class DataSet(object):
             for j in range(len(parser.header)):
                 elem[parser.header[j]] = lists[i][j]
             parsed.append(elem)
-        processed = {}
+        
+        wipe_redis(red)
+        red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
         for elem in parsed:
             word = elem["Word"]
             frequency = elem["Frequency"]
-            if word in processed:
-                processed[word].append(frequency)
-            else:
-                processed[word] = [frequency]
-        parsed = processed
-        red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
-        wipe_redis(red)
-        for key in parsed:
-            red.set(str(key), parsed[key])
-
-
+            red.set(word, frequency)
 
 if __name__ == "__main__":
     d = DataSet()
