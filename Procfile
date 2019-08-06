@@ -1,1 +1,1 @@
-web: gunicorn --worker-class=gevent --worker-connections=1000 --workers=3 fuzzyauto.wsgi
+web: gunicorn --workers=3 --threads=3 fuzzyauto.wsgi 
