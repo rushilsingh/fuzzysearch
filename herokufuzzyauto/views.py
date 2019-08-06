@@ -9,7 +9,10 @@ import os
 def index(request):
    
     red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
-    for key in hscan_iter(name, match="the", count=None)
+    values = []
+    for key in red.scan_iter("*procra*"):
         value = key
+        values.append
+    values = str(values)
 
-    return render(request, 'base.html', {'data': value})
+    return render(request, 'base.html', {'data': values})
