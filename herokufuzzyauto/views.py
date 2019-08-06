@@ -9,7 +9,7 @@ import os
 def index(request, word="the"):
    
     values = find(word)
-    values = str([word, dir(request))
+    values = str([word, dir(request)])
     return render(request, 'base.html', {'data': values})
 
 def find(key):
