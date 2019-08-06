@@ -40,9 +40,10 @@ class DataSet(object):
             for j in range(len(parser.header)):
                 elem[parser.header[j]] = lists[i][j]
             parsed.append(elem)
+         
+        red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
         
         wipe_redis(red)
-        red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
         for elem in parsed:
             word = elem["Word"]
             frequency = elem["Frequency"]
