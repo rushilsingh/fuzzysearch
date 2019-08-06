@@ -1,2 +1,1 @@
-web: gunicorn -c gunicorn.py fuzzyauto.wsgi --log-file -
-
+web: gunicorn --worker-class=gevent --worker-connections=1000 --workers=3 fuzzyauto.wsgi
