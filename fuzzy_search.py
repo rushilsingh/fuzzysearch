@@ -21,7 +21,7 @@ class DataSet(object):
         n = 1
         for line in self.text:
             word, frequency = line.split()   
-            pipe.set(word, frequency)
+            pipe.hset("h", word, frequency)
             n = n + 1
             if (n % 64) == 0:
                 pipe.execute()
