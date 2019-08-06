@@ -1,12 +1,5 @@
 import os
-import requests
-import io
-import zipfile
-import datetime
-import textfsm
 import redis
-import pytz
-import pickle
 
 
 class DataSet(object):
@@ -24,10 +17,15 @@ class DataSet(object):
         red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
         
         red.flushdb()
-
+        pipe = red.pipeline()
+        n = 1
         for line in self.text:
             divide = line.split()
-            red.set(divide[0], divide[1])
+            pipe.hmset(divide[0], divide[1])
+            n = n + 1
+            if (n % 64) == 0:
+                pipe.execute()
+                pipe = red.pipeline()
 
 if __name__ == "__main__":
     d = DataSet()
