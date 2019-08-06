@@ -10,7 +10,9 @@ from itertools import izip_longest
 def index(request):
    
     red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
-    value = load_data_async("the")
+    #value = load_data_async("the")
+    value = hget("h", "the")
+
     return render(request, 'base.html', {'data': value})
 
 
