@@ -7,12 +7,6 @@ import textfsm
 import redis
 import pytz
 
-def wipe_redis(red):
-    cursor = '0'
-    while cursor != 0:
-        cursor, keys = red.scan(cursor=cursor, match="*", count=5000)
-        if keys:
-            red.delete(*keys)
 
 class DataSet(object):
 
@@ -26,7 +20,7 @@ class DataSet(object):
             self.text = f.read()
         
     def parse(self):
-        template = "word_search_template"
+        template = "fuzzy_template"
 
         with open(template) as f:
             parser = textfsm.TextFSM(f)
@@ -38,13 +32,11 @@ class DataSet(object):
             for j in range(len(parser.header)):
                 elem[parser.header[j]] = lists[i][j]
             parsed.append(elem)
-        index = 1
+        print(parsed)
 
-        red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
-        wipe_redis(red)
 
 
 if __name__ == "__main__":
     d = DataSet()
     d.load()
-    print(d.text)
+    d.parse()
