@@ -8,13 +8,6 @@ import redis
 import pytz
 import pickle
 
-def wipe_redis(red):
-    cursor = '0'
-    while cursor != 0:
-        cursor, keys = red.scan(cursor=cursor, match="*", count=5000)
-        if keys:
-            red.delete(*keys)
-
 
 class DataSet(object):
 
@@ -30,7 +23,7 @@ class DataSet(object):
     def parse(self):
         red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
         
-        wipe_redis(red)
+        red.flushdb()
 
         for line in self.text:
             divide = line.split()
