@@ -1,6 +1,7 @@
-Endpoint = http://fuzzyauto.herokuapp.com/search?word=<word>
+UI = https://fuzzyauto.heroku.app.com/
+Endpoint = https://fuzzyauto.herokuapp.com/search?word=<word>
 
-GET call returns a dictionary with ranks as keys and words as values. Returns first 25 ranks.
+GET call returns a dictionary with ranks as keys and words as values, rendered visually as a table. Returns first 25 ranks.
 
 Criteria for ranking:
     The ranking of results satisfies the following conditions in decreasing order of precedence:
