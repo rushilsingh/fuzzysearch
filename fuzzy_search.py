@@ -143,7 +143,7 @@ class DataSet(object):
         lengths.sort()
         lengths = set(lengths)
         for length in lengths:
-            for result in result:
+            for result in results:
                 if len(result) == length:
                     final[current] = result
                     current += 1
