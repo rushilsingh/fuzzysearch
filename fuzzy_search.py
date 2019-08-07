@@ -79,8 +79,54 @@ class DataSet(object):
         sorted_results[current] = results["start"]
     
     sorted_results[current] = results["unsorted"]
-    #sorted_results = self.further_sort(sorted_results, mapping)
+    #sorted_results = self.further_sort(sorted_results, 1, mapping)
     return sorted_results
+
+    def further_sort(results, mapping):
+        final = {}
+        current = 1
+        for rank in results:
+            if len(results[rank]) == 1:
+                final[current] = results[rank]
+                current += 1
+            else:
+                current, extend_by = tertiary_sort (results[rank], current, mapping)
+                final.extend(extend_by)                
+
+
+    def tertiary_sort(results, current, mapping):
+        initial_current = current
+        occurrences = mapping.values()
+        occurrences = occurrences.sort()
+        ocurrences = set(occurrences)
+        final = {}
+        for number in occurrences:
+            elements = []
+            for word in result:
+                if results[word] == occurrences:
+                    elements.append(word)
+            final[current] = elements
+
+        results = final
+        final = {}
+        for rank in results:
+            if len(results[rank]) == 1:
+                final[current] = results[rank]
+                current += 1
+            else:
+                final[rank] = results[rank]
+                current += 1
+                #TODO: fix this branch
+        return current, final
+
+            
+
+
+
+
+                    
+
+            
 if __name__ == "__main__":
     d = DataSet()
     d.load()
