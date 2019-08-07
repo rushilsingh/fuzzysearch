@@ -8,14 +8,14 @@ import os
 d = DataSet()
 
 def index(request):
-
+     
     output = """
-        <form method="post" action="search">
-        Search: <input type="text" name="word"><br />
-        <input type="submit">
-        """
-    tmpl = env.get_template('base.html')
-    return render(request, base.html, {'data': output}   
+   	 <form type="get" action="search" style="margin: 0">
+  	 <input  id="search_box" type="text" name="search_box"  placeholder="Search..." >
+    	 <button id="search_submit" type="submit" >Submit</button>
+	 </form>
+    """
+    return render(request, 'base.html', {'data': output}   
 
 def search(self, word):
     values = d.find(word)
