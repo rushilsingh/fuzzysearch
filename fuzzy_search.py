@@ -14,8 +14,8 @@ class DataSet(object):
             self.text = f.readlines()
         
     def parse(self):
-        red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
-        #red = redis.Redis()
+        #red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
+        red = redis.Redis()
         red.flushdb()
         pipe = red.pipeline()
         n = 1
@@ -29,58 +29,58 @@ class DataSet(object):
     
     def find(self, key):
 
-    values = []
-    red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
-    #red = redis.Redis()
-    pipe = red.pipeline()
-    search = "*" + key + "*"
-    cursor = 0
-    if red.hexists("h", key):
-        while True:
-            cursor, value = red.hscan("h", cursor, search, 1000)
-            if cursor == 0:
-                break
-            if value != {}:
-                values.append(value)
-    else:
-        values = {}
-    mapping = values 
-    values = []
-    for dic in mapping:
-        for entry in dic:
-            values.append(str(entry)[2:])
-    
-    if not values:
-        return {}
+        values = []
+        red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
+        #red = redis.Redis()
+        pipe = red.pipeline()
+        search = "*" + key + "*"
+        cursor = 0
+        if red.hexists("h", key):
+            while True:
+                cursor, value = red.hscan("h", cursor, search, 1000)
+                if cursor == 0:
+                    break
+                if value != {}:
+                    values.append(value)
+        else:
+            values = {}
+        mapping = values 
+        values = []
+        for dic in mapping:
+            for entry in dic:
+                values.append(str(entry)[2:])
+        
+        if not values:
+            return {}
 
-    if len(values) == 1:
-        return {1:values[0]}
+        if len(values) == 1:
+            return {1:values[0]}
 
-    results = {}
-    unsorted = []
-    exact = []
-    start = []
-    for value in values:
-        if value == key:
-            exact.append(value)
-        elif value.startswith(key) and value != key:
-            start.append(value)
-        else:   
-            unsorted.append(value)
+        results = {}
+        unsorted = []
+        exact = []
+        start = []
+        for value in values:
+            if value == key:
+                exact.append(value)
+            elif value.startswith(key) and value != key:
+                start.append(value)
+            else:   
+                unsorted.append(value)
 
-    results["exact"] = exact
-    results["start"] = start 
-    results["unsorted"] = unsorted
-    current = 1
-    sorted_results = {}
-    if results["exact"]:
-        sorted_results[current] = results["exact"]
-    if results["start"]:
-        sorted_results[current] = results["start"]
-    
-    sorted_results[current] = results["unsorted"]
-    #sorted_results = self.further_sort(sorted_results, 1, mapping)
-    return sorted_results
+        results["exact"] = exact
+        results["start"] = start 
+        results["unsorted"] = unsorted
+        current = 1
+        sorted_results = {}
+        if results["exact"]:
+            sorted_results[current] = results["exact"]
+        if results["start"]:
+            sorted_results[current] = results["start"]
+        
+        sorted_results[current] = results["unsorted"]
+        sorted_results = self.further_sort(sorted_results, mapping)
+        return sorted_results
 
     def further_sort(results, mapping):
         final = {}
