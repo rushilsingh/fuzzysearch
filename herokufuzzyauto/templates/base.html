@@ -2,10 +2,22 @@
   <html>
       <head>
           <meta charset="utf-8">
-          <title>Basic Site Template</title>
+          <title>Fuzzy Search</title>
       </head>
   
       <body>
-         {{data}}
-    </body>
+       <table>
+    <tr>
+        <td>Ranking</td>
+        <td>Word</td>
+    </tr>
+
+    {% for key, value in data.items %}
+    <tr>
+        <td>{{key}}</td>
+        <td>{{value}}</td>
+    </tr>
+    {% endfor %}
+</table>
+       </body>
  </html>
