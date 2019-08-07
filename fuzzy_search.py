@@ -46,7 +46,8 @@ class DataSet(object):
         temp = {}
         for dic in mapping:
             for entry in dic:
-                word = str(entry)[2:]
+                if "'" or '"' in entry:
+                    word = str(entry)[2:]
                 values.append(word)
                 temp[word] = dic[entry]
 
