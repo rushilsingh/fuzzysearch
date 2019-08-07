@@ -6,18 +6,7 @@
       </head>
   
       <body>
-       <table>
-    <tr>
-        <td>Ranking</td>
-        <td>Word</td>
-    </tr>
-
-    {% for key, value in data.items %}
-    <tr>
-        <td>{{key}}</td>
-        <td>{{value}}</td>
-    </tr>
-    {% endfor %}
-</table>
+	<form type="get" action="search" style="margin: 0"> <input id="word" type="text" 		name="word" placeholder="Search..." > <button id="search_submit" type="submit" >
+	Submit</button> </form>
        </body>
  </html>
