@@ -10,10 +10,14 @@ class DataSet(object):
 
     
     def load(self):
+        """ Loads data file into text field as a list of lines """
+
         with open(self.fname) as f:
             self.text = f.readlines()
         
     def parse(self):
+        """ Parses data file into Redis database"""
+
         red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
         #red = redis.Redis()
         red.flushdb()
@@ -28,6 +32,9 @@ class DataSet(object):
                 pipe = red.pipeline()
     
     def find(self, key):
+        """ Find instances of the occurrence of the key anywhere in the word fields stored in the database 
+            Performs initial sorting (three groups: exact match, starting match, and others)
+        """
 
         values = []
         red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
@@ -90,6 +97,10 @@ class DataSet(object):
         return sorted_results
 
     def further_sort(self, results, mapping):
+        """ Furthers sorting pipeline by fixing single element entries and sends multiple element entries to 
+            next function to be sorted by number of occurrences 
+        """
+
         current = 1
         final = {}
         for rank in results:
@@ -104,6 +115,8 @@ class DataSet(object):
         return final
 
     def tertiary_sort(self, results, current, mapping):
+        """ Sorts words by number of occurrences. If there are clashes, sends those lists to next function to be sorted to length """
+
         initial_curr = current
         occurrences = list(mapping.values())
         occurrences.sort()
