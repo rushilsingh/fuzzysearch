@@ -1,11 +1,5 @@
-<!doctype html>
-  <html>
-      <head>
-          <meta charset="utf-8">
-          <title>Fuzzy Search</title>
-      </head>
-  
-      <body>
+{% extends "layout.html" %}
+{% block body %}
        <table>
     <tr>
         <td>Ranking</td>
@@ -18,6 +12,5 @@
         <td>{{value}}</td>
     </tr>
     {% endfor %}
-</table>
-       </body>
- </html>
+        </table>
+{% endblock %}

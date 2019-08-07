@@ -1,12 +1,6 @@
-<!doctype html>
-  <html>
-      <head>
-          <meta charset="utf-8">
-          <title>Fuzzy Search</title>
-      </head>
-  
-      <body>
+{% extends "layout.html" %}
+{% block body %}
 	<form type="get" action="{{data}}" style="margin: 0"> <input id="word" type="text" 		name="word" placeholder="Search..." > <button id="search_submit" type="submit" >
 	Submit</button> </form>
        </body>
- </html>
+{% endblock %}

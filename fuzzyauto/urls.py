@@ -3,6 +3,5 @@ from herokufuzzyauto import views
 
 urlpatterns = [
      url(r'^search/{0,1}$', views.endpoint),
-     url('', views.index)
-
+     url(r'^/{0,1}$', views.index)
 ]
