@@ -1,13 +1,5 @@
-<!doctype html>
-  <html>
-      <head>
-      {% load static %}
-      <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
-          <meta charset="utf-8">
-          <title>Fuzzy Search</title>
-      </head>
-  
-      <body>
+{% extends "layout.html" %}
+{% block body %}
        <table>
     <tr>
         <td>Ranking</td>
@@ -21,7 +13,4 @@
     </tr>
     {% endfor %}
         </table>
-    </body>
-
-    <footer>&copy; Copyright 2019 Rushil Singh <br /></footer>
- </html>
+{% endblock %}
