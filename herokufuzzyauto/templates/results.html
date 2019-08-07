@@ -3,6 +3,10 @@
       <head>
           <meta charset="utf-8">
           <title>Fuzzy Search</title>
+          {% load static %}
+          <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
+
+
       </head>
   
       <body>
@@ -18,6 +22,8 @@
         <td>{{value}}</td>
     </tr>
     {% endfor %}
-</table>
-       </body>
+        </table>
+    </body>
+
+    <footer>&copy; Copyright 2019 Rushil Singh <br /></footer>
  </html>

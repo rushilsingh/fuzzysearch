@@ -1,6 +1,9 @@
 <!doctype html>
   <html>
       <head>
+          {% load static %}
+          <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
+
           <meta charset="utf-8">
           <title>Fuzzy Search</title>
       </head>
@@ -9,4 +12,6 @@
 	<form type="get" action="{{endpoint}}" style="margin: 0"> <input id="word" type="text" 		name="word" placeholder="Search..." > <button id="search_submit" type="submit" >
 	Submit</button> </form>
        </body>
+
+  <footer>&copy; Copyright 2019 Rushil Singh <br /></footer>
  </html>
