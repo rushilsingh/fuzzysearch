@@ -14,10 +14,9 @@ def index(request, word):
 def find(key):
 
     values = []
-    #red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
-    red = redis.Redis()
+    red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
+    #red = redis.Redis()
     pipe = red.pipeline()
-    n = 1
     search = "*" + key + "*"
     cursor = 0
     if red.hexists("h", key):
