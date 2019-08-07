@@ -137,7 +137,7 @@ class DataSet(object):
                 
         return current, final
 
-    def final_sort(results, current):
+    def final_sort(self, results, current):
         final = {}
         lengths = [len(result) for result in results]
         lengths.sort()
