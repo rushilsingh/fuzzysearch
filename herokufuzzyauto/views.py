@@ -8,7 +8,7 @@ import os
 d = DataSet()
 
 def index(request):
-    return "build here"
+    return render(request, 'base.html', {'data': {1: 'a'}}
 
 def endpoint(request, word=''):
     word = request.GET.get('word', word)
