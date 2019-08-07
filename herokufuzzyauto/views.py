@@ -8,8 +8,8 @@ import os
 d = DataSet()
 
 def index(request):
-    endpoint = "search" 
-    return render(request, 'base.html', {'data': endpoint} )  
+    endpoint = "search"
+    return render(request, 'base.html', {'data': endpoint} )
 
 def endpoint(request, word=''):
     word = request.GET.get('word', word)
