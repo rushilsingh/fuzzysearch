@@ -119,8 +119,8 @@ class DataSet(object):
 
         initial_curr = current
         occurrences = list(mapping.values())
+        ocurrences = list(set(occurrences))
         occurrences.sort()
-        ocurrences = set(occurrences)
         final = {}
         for number in occurrences:
             number = int(number)
@@ -153,8 +153,7 @@ class DataSet(object):
     def final_sort(self, results, current):
         final = {}
         lengths = [len(result) for result in results]
-        lengths.sort()
-        lengths = set(lengths)
+        lengths = list(set(lengths))
         for length in lengths:
             for result in results:
                 if len(result) == length:
@@ -165,12 +164,6 @@ class DataSet(object):
                 if current> 25:
                     break
         return current, final
-
-
-
-
-
-
 
 
 
