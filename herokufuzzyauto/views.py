@@ -19,9 +19,50 @@ def find(key):
     pipe = red.pipeline()
     n = 1
     search = "*" + key + "*"
-    for value in red.hscan(search):
-        values.append(value)
+    cursor = 0
+    if red.hexists("h", key):
+        while True:
+            cursor, value = red.hscan("h", cursor, search, 1000)
+            if cursor == 0:
+                break
+            if value != {}:
+                values.append(value)
+    else:
+        values = {}
+    mapping = values 
+    values = []
+    current = 1
+    for dic in mapping:
+        for entry in dic:
+            values.append(str(entry)[2:])
+            current += 1
+    
+    if not values:
+        return {}
 
-    values = {key:values}
+    if len(values) == 1:
+        return {1:values[0]}
+
+    results = {}
+    unsorted = []
+    exact = None
+    start = []
+    for value in values:
+        if value == key:
+            exact = value
+        elif value.startswith(key) and value != key:
+            start.append(value)
+        else:   
+            unsorted.append(value)
+
+    results["exact"] = exact
+    results["unsorted"] = unsorted
+            
+    return results 
+
+    
+            
+
+    
     
     return str(values)
