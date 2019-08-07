@@ -8,7 +8,6 @@ class DataSet(object):
         self.fname = "word_search.tsv"
         self.text = None
 
-
     def load(self):
         """ Loads data file into text field as a list of lines """
 
@@ -18,7 +17,8 @@ class DataSet(object):
     def parse(self):
         """ Parses data file into Redis database"""
 
-        red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
+        red = redis.from_url(os.environ.get(
+            'REDIS_URL'), decode_responses=True)
         #red = redis.Redis()
         red.flushdb()
         pipe = red.pipeline()
@@ -37,7 +37,8 @@ class DataSet(object):
         """
 
         values = []
-        red = redis.from_url(os.environ.get('REDIS_URL'), decode_responses=True)
+        red = redis.from_url(os.environ.get(
+            'REDIS_URL'), decode_responses=True)
         #red = redis.Redis()
         pipe = red.pipeline()
         search = "*" + key + "*"
@@ -63,7 +64,7 @@ class DataSet(object):
             return {}
 
         if len(values[0]) == 1:
-            return {1:values[0]}
+            return {1: values[0]}
         results = {}
         unsorted = []
         exact = []
@@ -92,7 +93,7 @@ class DataSet(object):
 
         sorted_results = self.further_sort(sorted_results, mapping)
         for key in sorted_results:
-            if key>25:
+            if key > 25:
                 sorted_results.pop(key)
         return sorted_results
 
@@ -107,8 +108,9 @@ class DataSet(object):
             if len(results[rank]) == 1:
                 final[current] = results[rank][0]
                 current += 1
-            elif current<=25:
-                current, extend_by = self.tertiary_sort(results[rank], current, mapping)
+            elif current <= 25:
+                current, extend_by = self.tertiary_sort(
+                    results[rank], current, mapping)
                 final.update(extend_by)
             else:
                 pass
@@ -119,8 +121,8 @@ class DataSet(object):
 
         initial_curr = current
         occurrences = list(mapping.values())
+        ocurrences = list(set(occurrences))
         occurrences.sort()
-        ocurrences = set(occurrences)
         final = {}
         for number in occurrences:
             number = int(number)
@@ -134,7 +136,7 @@ class DataSet(object):
                 current += 1
                 if current > 25:
                     break
-            if current> 25:
+            if current > 25:
                 break
 
         results = final
@@ -153,8 +155,7 @@ class DataSet(object):
     def final_sort(self, results, current):
         final = {}
         lengths = [len(result) for result in results]
-        lengths.sort()
-        lengths = set(lengths)
+        lengths = list(set(lengths))
         for length in lengths:
             for result in results:
                 if len(result) == length:
@@ -162,17 +163,9 @@ class DataSet(object):
                     current += 1
                     if current > 25:
                         break
-                if current> 25:
+                if current > 25:
                     break
         return current, final
-
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":

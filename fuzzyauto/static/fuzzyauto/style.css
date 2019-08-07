@@ -1,0 +1,12 @@
+html {
+  font-size: 18px;
+  color: #333;
+}
+table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 15px;
+            }
+
