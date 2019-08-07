@@ -15,7 +15,7 @@ def index(request):
     	 <button id="search_submit" type="submit" >Submit</button>
 	 </form>
     """
-    return render(request, 'base.html', {'data': output}   
+    return render(request, 'base.html', {'data': output} )  
 
 def search(self, word):
     values = d.find(word)
