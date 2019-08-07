@@ -8,13 +8,13 @@ class DataSet(object):
         self.fname = "word_search.tsv"
         self.text = None
 
-    
+
     def load(self):
         """ Loads data file into text field as a list of lines """
 
         with open(self.fname) as f:
             self.text = f.readlines()
-        
+
     def parse(self):
         """ Parses data file into Redis database"""
 
@@ -24,15 +24,15 @@ class DataSet(object):
         pipe = red.pipeline()
         n = 1
         for line in self.text:
-            word, frequency = line.split()   
+            word, frequency = line.split()
             pipe.hset("h", word, frequency)
             n = n + 1
             if (n % 64) == 0:
                 pipe.execute()
                 pipe = red.pipeline()
-    
+
     def find(self, key):
-        """ Find instances of the occurrence of the key anywhere in the word fields stored in the database 
+        """ Find instances of the occurrence of the key anywhere in the word fields stored in the database
             Performs initial sorting (three groups: exact match, starting match, and others)
         """
 
@@ -48,7 +48,7 @@ class DataSet(object):
                 break
             if value != {}:
                 values.append(value)
-        mapping = values 
+        mapping = values
         values = []
         temp = {}
         for dic in mapping:
@@ -73,11 +73,11 @@ class DataSet(object):
                 exact.append(value)
             elif value.startswith(key) and value != key:
                 start.append(value)
-            else:   
+            else:
                 unsorted.append(value)
 
         results["exact"] = exact
-        results["start"] = start 
+        results["start"] = start
         results["unsorted"] = unsorted
         current = 1
         sorted_results = {}
@@ -87,9 +87,9 @@ class DataSet(object):
         if results["start"]:
             sorted_results[current] = results["start"]
             current += 1
-        
+
         sorted_results[current] = results["unsorted"]
-        
+
         sorted_results = self.further_sort(sorted_results, mapping)
         for key in sorted_results:
             if key>25:
@@ -97,8 +97,8 @@ class DataSet(object):
         return sorted_results
 
     def further_sort(self, results, mapping):
-        """ Furthers sorting pipeline by fixing single element entries and sends multiple element entries to 
-            next function to be sorted by number of occurrences 
+        """ Furthers sorting pipeline by fixing single element entries and sends multiple element entries to
+            next function to be sorted by number of occurrences
         """
 
         current = 1
@@ -109,8 +109,8 @@ class DataSet(object):
                 current += 1
             elif current<=25:
                 current, extend_by = self.tertiary_sort(results[rank], current, mapping)
-                final.update(extend_by)     
-            else:   
+                final.update(extend_by)
+            else:
                 pass
         return final
 
@@ -146,8 +146,8 @@ class DataSet(object):
                 current += 1
             else:
                 current, extend_by = self.final_sort(results[rank], current)
-                final.update(extend_by)    
-                
+                final.update(extend_by)
+
         return current, final
 
     def final_sort(self, results, current):
@@ -165,16 +165,16 @@ class DataSet(object):
                 if current> 25:
                     break
         return current, final
-                
-
-            
 
 
 
 
-                    
 
-            
+
+
+
+
+
 if __name__ == "__main__":
     d = DataSet()
     d.load()
