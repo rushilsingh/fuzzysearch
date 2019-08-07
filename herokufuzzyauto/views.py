@@ -55,7 +55,7 @@ def find(key):
             unsorted.append(value)
 
     results["exact"] = exact
-    restuls["start"] = start 
+    results["start"] = start 
     results["unsorted"] = unsorted
     current = 1
     sorted_results = {}
