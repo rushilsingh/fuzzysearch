@@ -9,3 +9,10 @@ Criteria for ranking:
 	b. Common words (those with a higher usage count) are ranked higher than rare words.
 	c. Short words rank higher than long words. 
 	i. As a corollary to the above, an exact match is always ranked as the first result.
+
+Components used:
+Redis
+Django
+Gunicorn
+Python
+Heroku
