@@ -26,6 +26,7 @@ class DataSet(object):
             if (n % 64) == 0:
                 pipe.execute()
                 pipe = red.pipeline()
+    
     def find(self, key):
 
     values = []
@@ -45,11 +46,9 @@ class DataSet(object):
         values = {}
     mapping = values 
     values = []
-    current = 1
     for dic in mapping:
         for entry in dic:
             values.append(str(entry)[2:])
-            current += 1
     
     if not values:
         return {}
@@ -59,11 +58,11 @@ class DataSet(object):
 
     results = {}
     unsorted = []
-    exact = None
+    exact = []
     start = []
     for value in values:
         if value == key:
-            exact = value
+            exact.append(value)
         elif value.startswith(key) and value != key:
             start.append(value)
         else:   
@@ -76,7 +75,12 @@ class DataSet(object):
     sorted_results = {}
     if results["exact"]:
         sorted_results[current] = results["exact"]
-
+    if results["start"]:
+        sorted_results[current] = results["start"]
+    
+    sorted_results[current] = results["unsorted"]
+    #sorted_results = self.further_sort(sorted_results, mapping)
+    return sorted_results
 if __name__ == "__main__":
     d = DataSet()
     d.load()
