@@ -13,11 +13,10 @@
         <td>c</td>
     </tr>
 
-    {% for key, values in data.items %}
+    {% for key, value in data.items %}
     <tr>
         <td>{{key}}</td>
-        {% for v in values%}
-        <td>{{v}}</td>
+        <td>{{value}}</td>
         {% endfor %}
     </tr>
     {% endfor %}
