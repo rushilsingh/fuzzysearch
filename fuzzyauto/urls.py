@@ -17,5 +17,6 @@ from django.conf.urls import url
 #from django.contrib import admin
 from herokufuzzyauto import views
 urlpatterns = [
-     url(r'^(?P<word>.*)/', views.index)
+     url(r'^search/{0,1}', views.index)
+
 ]
