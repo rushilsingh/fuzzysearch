@@ -122,13 +122,7 @@ USE_TZ = True
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT =    os.path.join(PROJECT_DIR, "staticfiles")
 STATIC_URL = '/static/'
-<<<<<<< HEAD
-STATIC_DIRS = os.path.join(PROJECT_DIR, 'static')
-=======
 STATIC_DIRS = [os.path.join(PROJECT_DIR, 'static'),
 os.path.join(PROJECT_DIR, 'copy/fuzzyauto'),
 '/home/zufo'
 ]
-
-
->>>>>>> c02c3e1... Working on staticfile issue
