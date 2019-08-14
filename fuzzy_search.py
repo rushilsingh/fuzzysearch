@@ -1,6 +1,6 @@
 import os
 import redis
-
+import copy
 
 class DataSet(object):
 
@@ -92,10 +92,12 @@ class DataSet(object):
         sorted_results[current] = results["unsorted"]
 
         sorted_results = self.further_sort(sorted_results, mapping)
+        results = copy.deepcopy(sorted_results)
         for key in sorted_results:
             if key > 25:
-                sorted_results.pop(key)
-        return sorted_results
+                if key in results:
+                    results.pop(key)
+        return results
 
     def further_sort(self, results, mapping):
         """ Furthers sorting pipeline by fixing single element entries and sends multiple element entries to
