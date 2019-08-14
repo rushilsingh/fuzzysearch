@@ -22,20 +22,22 @@ class DataSet(object):
         #red = redis.Redis()
         red.flushdb()
         pipe = red.pipeline()
-        n = 1
+        n = 0
         for line in self.text:
             word, frequency = line.split()
             pipe.hset("h", word, frequency)
-            n = n + 1
+            n += 1
             if (n % 64) == 0:
                 pipe.execute()
                 pipe = red.pipeline()
+        pipe.execute()
 
     def find(self, key):
         """ Find instances of the occurrence of the key anywhere in the word fields stored in the database
             Performs initial sorting (three groups: exact match, starting match, and others)
         """
-
+        if key == "":
+            return {}
         values = []
         red = redis.from_url(os.environ.get(
             'REDIS_URL'), decode_responses=True)
@@ -45,10 +47,11 @@ class DataSet(object):
         cursor = 0
         while True:
             cursor, value = red.hscan("h", cursor, search, 1000)
-            if cursor == 0:
-                break
             if value != {}:
                 values.append(value)
+            if cursor == 0:
+                break
+
         mapping = values
         values = []
         temp = {}
