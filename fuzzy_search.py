@@ -35,7 +35,8 @@ class DataSet(object):
         """ Find instances of the occurrence of the key anywhere in the word fields stored in the database
             Performs initial sorting (three groups: exact match, starting match, and others)
         """
-
+        if key == "":
+            return {}
         values = []
         red = redis.from_url(os.environ.get(
             'REDIS_URL'), decode_responses=True)
