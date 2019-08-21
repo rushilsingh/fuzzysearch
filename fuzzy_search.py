@@ -42,7 +42,6 @@ class DataSet(object):
         red = redis.from_url(os.environ.get(
             'REDIS_URL'), decode_responses=True)
         #red = redis.Redis()
-        pipe = red.pipeline()
         search = "*" + key + "*"
         cursor = 0
         while True:
@@ -126,7 +125,7 @@ class DataSet(object):
 
         initial_curr = current
         occurrences = list(mapping.values())
-        ocurrences = list(set(occurrences))
+        occurrences = list(set(occurrences))
         occurrences.sort()
         final = {}
         for number in occurrences:

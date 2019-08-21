@@ -74,14 +74,13 @@ WSGI_APPLICATION = 'fuzzyauto.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-import os
 CACHES = {
     "default": {
          "BACKEND": "redis_cache.RedisCache",
          "LOCATION": os.environ.get('REDIS_URL'),
     }
 }
- 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
