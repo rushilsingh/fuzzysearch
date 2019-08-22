@@ -1,3 +1,6 @@
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cabd1d9749b74f7da4ae558f70815a76)](https://app.codacy.com/app/rushilsingh/fuzzysearch?utm_source=github.com&utm_medium=referral&utm_content=rushilsingh/fuzzysearch&utm_campaign=Badge_Grade_Dashboard)
+
 UI = <https://fuzzyauto.heroku.app.com/>
 Endpoint = <https://fuzzyauto.herokuapp.com/search?word=<word>>
 
